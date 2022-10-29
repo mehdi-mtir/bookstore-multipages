@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-book-edit',
@@ -8,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class BookEditComponent implements OnInit {
 
   constructor() { }
+
+  editBook(f : NgForm){
+
+  }
 
   ngOnInit(): void {
   }
