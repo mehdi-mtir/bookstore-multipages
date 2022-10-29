@@ -1,1 +1,30 @@
-<p>book-list works!</p>
+<div class="row mb-3">
+  <h1>Liste des livres</h1>
+  <button
+    class="btn btn-success col-3"
+    [routerLink]="['add']" >
+    Ajouter un livre
+  </button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Auteur</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Editer</th>
+        <th scope="col">Supprimer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of listBooks">
+        <th scope="row">{{book.id}}</th>
+        <td>{{book.titre}}</td>
+        <td>{{book.auteur}}</td>
+        <td>{{book.prix}}</td>
+        <td><button class="btn btn-primary" [routerLink]="['edit', book.id]">Editer</button></td>
+        <td><button class="btn btn-danger">Supprimer</button></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
