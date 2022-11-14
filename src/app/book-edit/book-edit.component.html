@@ -3,21 +3,21 @@
   <form (ngSubmit)="editBook(f)" #f="ngForm">
     <div class="mb-3">
       <label for="titre" class="form-label">Titre *</label>
-      <input type="text" id="titre" class="form-control" name="titre" ngModel required #t="ngModel" />
+      <input type="text" id="titre" class="form-control" name="titre" ngModel required #t="ngModel" [(ngModel)]="bookToEdit.titre" />
       <div *ngIf="t.invalid && t.touched" class="alert alert-danger" role="alert">
         Ce champ est obligatoire!
       </div>
     </div>
     <div class="mb-3">
       <label for="auteur" class="form-label">Auteur *</label>
-      <input type="text" id="auteur" class="form-control" name="auteur" ngModel required #a="ngModel" />
+      <input type="text" id="auteur" class="form-control" name="auteur" ngModel required #a="ngModel" [(ngModel)]="bookToEdit.auteur" />
       <div *ngIf="a.invalid && a.touched" class="alert alert-danger" role="alert">
         Ce champ est obligatoire!
       </div>
     </div>
     <div class="mb-3">
       <label for="prix" class="form-label">Prix</label>
-      <input type="text" id="prix" class="form-control" name="prix" ngModel required #p="ngModel" />
+      <input type="text" id="prix" class="form-control" name="prix" ngModel required #p="ngModel" [(ngModel)]="bookToEdit.prix" />
       <div *ngIf="p.invalid && p.touched" class="alert alert-danger" role="alert">
         Ce champ est obligatoire!
       </div>

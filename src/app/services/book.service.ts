@@ -23,6 +23,10 @@ export class BookService {
     ) || new Book()
   }
 
+  getNextId(){
+    return this.listBooks[this.listBooks.length-1].id+1
+  }
+
   addBook(book : Book){
     this.listBooks = [...this.listBooks, book];
   }
