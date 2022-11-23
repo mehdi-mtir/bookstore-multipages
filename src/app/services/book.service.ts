@@ -1,20 +1,26 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Book } from '../models/book';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  private listBooks = [
-    new Book(1, "The Slight Edge", "Jeff Olsen", "23.00"),
-    new Book(2, "Atomic Habits", "James Clear", "18.00"),
-    new Book(3, "So Good They Can't ignore you", "Cal Newport", "18.70")
-  ]
+  listBooksChanged = new Subject<Book[]>()
+  private listBooks : Book[] = []
 
-  constructor() { }
+  constructor(private http : HttpClient) { }
 
-  getBooks() : Book[]{
-    return [...this.listBooks];
+  getBooks(){
+    //return [...this.listBooks];
+    this.http.get<Book[]>('http://localhost:3000/books').subscribe(
+      (books : Book[]) => {
+        this.listBooks = books;
+        this.listBooksChanged.next(this.listBooks);
+      }
+    )
+
   }
 
   getBookById(id : number) : Book{
@@ -29,6 +35,7 @@ export class BookService {
 
   addBook(book : Book){
     this.listBooks = [...this.listBooks, book];
+    this.listBooksChanged.next(this.listBooks);
   }
 
   editBook(book : Book){
@@ -40,12 +47,18 @@ export class BookService {
           return b;
       }
     )
+    this.listBooksChanged.next(this.listBooks);
   }
 
   deleteBook(id : number){
     this.listBooks = this.listBooks.filter(
       b => b.id !== id
     )
+    this.listBooksChanged.next(this.listBooks);
+
+    //return this.listBooks;
+
+    //console.log(this.listBooks);
   }
 
 

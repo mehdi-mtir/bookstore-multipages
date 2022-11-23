@@ -11,10 +11,11 @@ import { BookService } from '../services/book.service';
 })
 export class BookAddComponent implements OnInit {
 
-  constructor(private service : BookService, private router : Router) { }
+  constructor(
+    private service : BookService,
+    private router : Router) { }
 
   addBook(f : NgForm){
-
     const newBook = new Book(this.service.getNextId(), f.value.titre, f.value.auteur, f.value.prix);
     this.service.addBook(newBook);
     this.router.navigate(["/books"]);

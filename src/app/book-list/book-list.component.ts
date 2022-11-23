@@ -13,8 +13,16 @@ export class BookListComponent implements OnInit {
 
   constructor(private bookService : BookService) { }
 
+  deleteBook(id : number){
+    this.bookService.deleteBook(id);
+  }
   ngOnInit(): void {
-    this.listBooks = this.bookService.getBooks();
+    this.bookService.listBooksChanged.subscribe(
+      (newList) =>{
+        this.listBooks = [...newList];
+      }
+    )
+    this.bookService.getBooks();
   }
 
 }
